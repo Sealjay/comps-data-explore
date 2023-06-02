@@ -51,7 +51,7 @@ It is important to you that you follow these rules:
 - ANSWER THE QUESTION BEING ASKED with information FROM SOURCES.
 - Highlight headings, subheadings, lists, and quotes using appropriate html conventions.
 - ALL responses are two pages long.
-- Use at least 8 sources per answer, no more than 11. 
+- Try to use at least 8 sources per answer, no more than 11. 
 IMPORTANT: All responses must be compliant with the criteria:
 
 - Did the response answer ALL parts of the original domain question?
@@ -100,7 +100,7 @@ Sources:
 
     def run(self, history: list[dict], overrides: dict) -> any:
         use_semantic_captions = True if overrides.get("semantic_captions") else False
-        top = overrides.get("top") or 8
+        top = overrides.get("top") or 5
         exclude_category = overrides.get("exclude_category") or None
         filter = (
             "category ne '{}'".format(exclude_category.replace("'", "''"))
@@ -123,7 +123,7 @@ Sources:
         response = openai.ChatCompletion.create(
             engine=self.gpt35_deployment,
             messages=messages,
-            temperature=overrides.get("temperature") or 0.9,
+            temperature=overrides.get("temperature") or 0.7,
             max_tokens=32,
             n=1,
         )
@@ -195,7 +195,7 @@ Sources:
             engine=self.gpt432k_deployment,
             messages=messages,
             temperature=overrides.get("temperature") or 0.7,
-            max_tokens=2000,
+            max_tokens=1500,
             n=1,
         )
 

@@ -32,7 +32,7 @@ export const AnalysisPanel = ({ answer, activeTab, activeCitation, citationHeigh
     const isDisabledCitationTab: boolean = !activeCitation;
 
     const sanitizedThoughts = DOMPurify.sanitize(answer.thoughts!);
-    const fullPDFUrl =activeCitation);
+    const fullPDFUrl = activeCitation ? getFullPdfPath(activeCitation) : "";
 
     return (
         <Pivot
@@ -59,7 +59,7 @@ export const AnalysisPanel = ({ answer, activeTab, activeCitation, citationHeigh
                 headerText="Citation"
                 headerButtonProps={isDisabledCitationTab ? pivotItemDisabledStyle : undefined}
             >
-                <a href={getFullPdfPath(fullPDFUrl ? fullPDFUrl : "")} target="_blank">
+                <a href={fullPDFUrl} target="_blank">
                     Open full PDF
                 </a>
                 <iframe title="Citation" src={activeCitation} width="100%" height={citationHeight} />

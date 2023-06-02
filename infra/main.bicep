@@ -127,6 +127,8 @@ module functionApp 'core/host/functions.bicep' = {
     searchIndexName: searchIndexName
     searchServiceName: searchService.outputs.name
     gpt4DeploymentName: gpt4DeploymentName
+    gpt35DeploymentName: gpt35DeploymentName
+    gpt432kDeploymentName: gpt432kDeploymentName
     linuxFxVersion: 'Python|3.9'
   }
   dependsOn: [

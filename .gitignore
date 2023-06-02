@@ -425,3 +425,4 @@ notebooks/.ruff_cache/
 api/local.settings.json
 api_v2/local.settings.json
 **/local.settings.json
+.azure/**/.env

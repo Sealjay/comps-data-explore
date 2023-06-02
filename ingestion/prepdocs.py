@@ -6,7 +6,7 @@ import io
 import re
 import time
 from pypdf import PdfReader, PdfWriter
-from azure.identity import AzureDeveloperCliCredential, DefaultAzureCredential
+from azure.identity import AzureDeveloperCliCredential
 from azure.core.credentials import AzureKeyCredential
 from azure.storage.blob import BlobServiceClient
 from azure.search.documents.indexes import SearchIndexClient
@@ -121,13 +121,21 @@ def upload_blobs(filename):
     blob_container = blob_service.get_container_client(args.container)
     if not blob_container.exists():
         blob_container.create_container()
-    blob_container_original = blob_service.get_container_client(args.container) + "original"
+    # we also want the original filename
+    blob_service_original = BlobServiceClient(
+        account_url=f"https://{args.storageaccount}.blob.core.windows.net",
+        credential=storage_creds,
+    )
+    container_name_for_original_content = args.container + "original"
+    blob_container_original = blob_service_original.get_container_client(container_name_for_original_content)
     if not blob_container_original.exists():
         blob_container_original.create_container()
-    # we also want the original filename
-    with open(filename, "rb") as data:
-            blob_container_original.upload_blob(filename, data, overwrite=True)
-
+    try:
+        with open(filename, "rb") as data:
+            file_path=os.path.basename(filename)
+            blob_container_original.upload_blob(file_path, data, overwrite=True)
+    except Exception as e:
+        print(f"Error uploading file: {e}")
     # if file is PDF split into pages and upload each page as a separate blob
     if os.path.splitext(filename)[1].lower() == ".pdf":
         reader = PdfReader(filename)
@@ -377,13 +385,7 @@ def create_search_index():
                     type="Edm.String",
                     filterable=True,
                     facetable=True,
-                ),
-                SimpleField(
-                    name="sourcefile_original",
-                    type="Edm.String",
-                    filterable=True,
-                    facetable=True,
-                ),
+                )
             ],
             semantic_settings=SemanticSettings(
                 configurations=[
@@ -418,7 +420,6 @@ def index_sections(filename, sections):
     i = 0
     batch = []
     for s in sections:
-        s["sourcefile_original"] = filename
         batch.append(s)
         i += 1
         if i % 1000 == 0:

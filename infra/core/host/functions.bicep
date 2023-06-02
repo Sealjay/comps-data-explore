@@ -48,6 +48,9 @@ param publicNetworkAccess string = 'Enabled'
 
 param searchIndexName string = 'gptkb'
 param gpt4DeploymentName string = 'gpt4'
+param gpt432kDeploymentName string = 'gpt432'
+param gpt35DeploymentName string = 'gpt35'
+
 
 var hostingPlanName = functionAppName
 var applicationInsightsName = functionAppName
@@ -157,6 +160,8 @@ resource functionApp 'Microsoft.Web/sites@2018-11-01' = {
         { name: 'AZURE_SEARCH_INDEX', value: searchIndexName }
         { name: 'AZURE_SEARCH_SERVICE', value: searchServiceName }
         { name: 'AZURE_OPENAI_GPT4_DEPLOYMENT', value: gpt4DeploymentName }
+        { name: 'AZURE_OPENAI_GPT432k_DEPLOYMENT', value: gpt432kDeploymentName }
+        { name: 'AZURE_OPENAI_GPT35_DEPLOYMENT', value: gpt35DeploymentName }
         { name: 'AzureWebJobsFeatureFlags', value: 'EnableWorkerIndexing' }
       ]
       ftpsState: 'FtpsOnly'

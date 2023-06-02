@@ -8,7 +8,7 @@ jobs:
       - name: Run tdg-github-action
         uses: ribtoks/tdg-github-action@master
         with:
-          TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          TOKEN: ${{ secrets.BLACK_GITHUB_SECRET }}
           REPO: ${{ github.repository }}
           SHA: ${{ github.sha }}
           REF: ${{ github.ref }}

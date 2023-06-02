@@ -1,0 +1,11 @@
+{
+  "recommendations": [
+    "esbenp.prettier-vscode",
+    "ms-azuretools.azure-dev",
+    "ms-azuretools.vscode-azurefunctions",
+    "ms-python.python",
+    "humao.rest-client",
+    "ms-azuretools.vscode-bicep",
+    "ms-azuretools.vscode-azurestaticwebapps"
+  ]
+}

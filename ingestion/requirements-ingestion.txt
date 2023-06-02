@@ -1,0 +1,8 @@
+pypdf==3.7.1
+azure-identity==1.13.0b3
+azure-search-documents==11.4.0b3
+azure-ai-formrecognizer==3.2.1
+azure-storage-blob==12.14.1
+chardet==5.1.0
+urllib3==1.26.15
+charset_normalizer==3.1.0

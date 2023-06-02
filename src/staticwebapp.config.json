@@ -1,0 +1,68 @@
+{
+    "trailingSlash": "auto",
+    "platform": {
+        "apiRuntime": "python:3.9"
+    },
+    "routes": [
+        { "route": "/.well-known/*", "allowedRoles": ["anonymous"] },
+        {
+            "route": "/api/content/*",
+            "headers": {
+                "cache-control": "must-revalidate, max-age=15770000"
+            },
+            "allowedRoles": ["authenticated"]
+        },
+        {
+            "route": "/api/chat",
+            "allowedRoles": ["authenticated"]
+        },
+        {
+            "route": "/api/content",
+            "allowedRoles": ["authenticated"]
+        },
+        {
+            "route": "/.auth/login/twitter",
+            "statusCode": 404
+        },
+        {
+            "route": "/.auth/login/github",
+            "statusCode": 404
+        },
+        {
+            "route": "/*",
+            "allowedRoles": ["authenticated"]
+        }
+    ],
+    "navigationFallback": {
+        "rewrite": "index.html",
+        "exclude": ["/images/*.{png,jpg,gif}", "/css/*", "/favicon.ico", "/.well-known/*"]
+    },
+    "responseOverrides": {
+        "401": {
+            "statusCode": 302,
+            "redirect": "/.auth/login/aad"
+        },
+        "404": {
+            "rewrite": "index.html",
+            "statusCode": 404
+        }
+    },
+    "mimeTypes": {
+        ".json": "application/json"
+    },
+    "auth": {
+        "identityProviders": {
+            "azureActiveDirectory": {
+                "userDetailsClaim": "http://schemas.xmlsoap.org/ws/2005/05/identity/claims/name",
+                "registration": {
+                    "openIdIssuer": "https://login.microsoftonline.com/dd71d1d3-4bdf-4a7d-95e6-f7fca64de78d",
+                    "clientIdSettingName": "AZURE_CLIENT_ID",
+                    "clientSecretSettingName": "AZURE_CLIENT_SECRET"
+                }
+            }
+        }
+    },
+    "globalHeaders": {
+        "Strict-Transport-Security": "max-age=31536000; includeSubDomains"
+    }
+}

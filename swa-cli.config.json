@@ -1,0 +1,18 @@
+{
+  "$schema": "https://aka.ms/azure/static-web-apps-cli/schema",
+  "configurations": {
+    "ava-gpt4-search": {
+      "appLocation": "src",
+      "apiLocation": "api",
+      "outputLocation": "dist",
+      "appBuildCommand": "npm run build",
+      "run": "npm run dev",
+      "appDevserverUrl": "http://localhost:5173",
+      "resourceGroupName": "EmTech_gpt4_search",
+      "open": true,
+      "swaConfigLocation": "src",
+      "appName": "ava-gpt4-search",
+      "resourceGroup": "ava-gpt4-search-rg"
+    }
+  }
+}

@@ -160,7 +160,7 @@ resource functionApp 'Microsoft.Web/sites@2018-11-01' = {
         { name: 'AZURE_SEARCH_INDEX', value: searchIndexName }
         { name: 'AZURE_SEARCH_SERVICE', value: searchServiceName }
         { name: 'AZURE_OPENAI_GPT4_DEPLOYMENT', value: gpt4DeploymentName }
-        { name: 'AZURE_OPENAI_GPT432k_DEPLOYMENT', value: gpt432kDeploymentName }
+        { name: 'AZURE_OPENAI_GPT432K_DEPLOYMENT', value: gpt432kDeploymentName }
         { name: 'AZURE_OPENAI_GPT35_DEPLOYMENT', value: gpt35DeploymentName }
         { name: 'AzureWebJobsFeatureFlags', value: 'EnableWorkerIndexing' }
       ]

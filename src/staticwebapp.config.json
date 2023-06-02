@@ -13,11 +13,14 @@
             "allowedRoles": ["authenticated"]
         },
         {
-            "route": "/api/chat",
+            "route": "/api/contentoriginal/*",
+            "headers": {
+                "cache-control": "must-revalidate, max-age=15770000"
+            },
             "allowedRoles": ["authenticated"]
         },
         {
-            "route": "/api/content",
+            "route": "/api/chat",
             "allowedRoles": ["authenticated"]
         },
         {
@@ -55,7 +58,7 @@
             "azureActiveDirectory": {
                 "userDetailsClaim": "http://schemas.xmlsoap.org/ws/2005/05/identity/claims/name",
                 "registration": {
-                    "openIdIssuer": "https://login.microsoftonline.com/dd71d1d3-4bdf-4a7d-95e6-f7fca64de78d",
+                    "openIdIssuer": "https://login.microsoftonline.com/90a62222-736e-4122-bcfd-1d287ca59156",
                     "clientIdSettingName": "AZURE_CLIENT_ID",
                     "clientSecretSettingName": "AZURE_CLIENT_SECRET"
                 }

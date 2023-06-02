@@ -73,16 +73,19 @@ Sources:
         self,
         search_client: SearchClient,
         gpt4_deployment: str,
+        gpt432k_deployment: str,
+        gpt35_deployment: str,
         sourcepage_field: str,
         content_field: str,
     ):
         self.search_client = search_client
         self.gpt4_deployment = gpt4_deployment
+        self.gpt35_deployment = gpt35_deployment
+        self.gpt432k_deployment = gpt432k_deployment
         self.sourcepage_field = sourcepage_field
         self.content_field = content_field
         openai.api_type = "azure"
         AZURE_OPENAI_SERVICE = os.environ.get("AZURE_OPENAI_SERVICE")
-        AZURE_TENANT_ID = os.environ.get("AZURE_TENANT_ID")
         openai.api_base = f"https://{AZURE_OPENAI_SERVICE}.openai.azure.com"
         openai.api_version = "2023-03-15-preview"
         # Comment these two lines out if using keys, set your API key in the OPENAI_API_KEY environment variable instead
@@ -117,7 +120,7 @@ Sources:
                 messages.append({"role": newrole, "content": history[index][role]})
 
         response = openai.ChatCompletion.create(
-            engine=self.gpt4_deployment,
+            engine=self.gpt35_deployment,
             messages=messages,
             temperature=overrides.get("temperature") or 0.7,
             max_tokens=32,

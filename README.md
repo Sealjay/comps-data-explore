@@ -19,6 +19,8 @@
 11. Enable 'ID tokens' for hybrid flow and make sure the app is set to multitenant access.
 12. Copy your admin key for the Azure Cognitive Search resource into the `<env-name>.env` file created in the `.azure/<env-name>/` directory by `azd provision`. Name the key `AZURE_SEARCH_KEY`.
 13. Change into the `ingestion` directory and run `./prepdocs.sh` to ingest PDFs in the `data` folder.
+14. Open `src/staticwebapp.config.json` ad update the `auth/identifyProviders/azureActiveDirectory/registration/openIdIssuer` to have the correct tenant id.
+15. Open the deployed azure static web app, and add a variable to the `AZURE_CLIENT_ID` and `AZURE_CLIENT_SECRET` to reference the app you created in step 5.
 
 #### Suggestions
 ##### Running the website as a local app

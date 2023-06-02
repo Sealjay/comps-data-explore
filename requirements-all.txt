@@ -1,4 +1,2 @@
 -r ingestion/requirements-ingestion.txt
 -r api/requirements.txt
--r notebooks/requirements-dev.txt
--r notebooks/requirements-marketing.txt

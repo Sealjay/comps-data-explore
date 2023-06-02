@@ -121,12 +121,12 @@ def upload_blobs(filename):
     blob_container = blob_service.get_container_client(args.container)
     if not blob_container.exists():
         blob_container.create_container()
-    blob_container_original = blob_service.get_container_client(args.container) + "_original"
+    blob_container_original = blob_service.get_container_client(args.container) + "original"
     if not blob_container_original.exists():
         blob_container_original.create_container()
     # we also want the original filename
     with open(filename, "rb") as data:
-            blob_container_original.upload_blob(blob_name, data, overwrite=True)
+            blob_container_original.upload_blob(filename, data, overwrite=True)
 
     # if file is PDF split into pages and upload each page as a separate blob
     if os.path.splitext(filename)[1].lower() == ".pdf":
@@ -378,6 +378,12 @@ def create_search_index():
                     filterable=True,
                     facetable=True,
                 ),
+                SimpleField(
+                    name="sourcefile_original",
+                    type="Edm.String",
+                    filterable=True,
+                    facetable=True,
+                ),
             ],
             semantic_settings=SemanticSettings(
                 configurations=[
@@ -412,6 +418,7 @@ def index_sections(filename, sections):
     i = 0
     batch = []
     for s in sections:
+        s["sourcefile_original"] = filename
         batch.append(s)
         i += 1
         if i % 1000 == 0:

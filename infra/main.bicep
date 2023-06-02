@@ -27,6 +27,10 @@ var openAiServiceName = '${abbrs.cognitiveServicesAccounts}${resourceToken}'
 param openAiSkuName string = 'S0'
 param gpt4DeploymentName string = 'gpt4'
 param gpt4ModelName string = 'gpt-4'
+param gpt432kDeploymentName string = 'gpt432'
+param gpt432kModelName string = 'gpt-4-32k'
+param gpt35DeploymentName string = 'gpt35'
+param gpt35ModelName string = 'gpt-35-turbo'
 
 var formRecognizerServiceName = '${abbrs.cognitiveServicesFormRecognizer}${resourceToken}'
 param formRecognizerSkuName string = 'S0'
@@ -80,6 +84,28 @@ module openAi 'core/ai/cognitiveservices.bicep' = {
           format: 'OpenAI'
           name: gpt4ModelName
           version: '0314'
+        }
+        scaleSettings: {
+          scaleType: 'Standard'
+        }
+      }
+      {
+        name: gpt432kDeploymentName
+        model: {
+          format: 'OpenAI'
+          name: gpt432kModelName
+          version: '0314'
+        }
+        scaleSettings: {
+          scaleType: 'Standard'
+        }
+      }
+      {
+        name: gpt35DeploymentName
+        model: {
+          format: 'OpenAI'
+          name: gpt35ModelName
+          version: '0301'
         }
         scaleSettings: {
           scaleType: 'Standard'

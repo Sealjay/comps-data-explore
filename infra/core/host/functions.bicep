@@ -14,7 +14,7 @@ param tags object = {
 }
 
 @description('The name of the containers to deploy with the Azure Function.')
-param containers array = [ 'content' ]
+param containers array = [ 'content','contentoriginal' ]
 
 @description('Location for all resources.')
 param location string = resourceGroup().location

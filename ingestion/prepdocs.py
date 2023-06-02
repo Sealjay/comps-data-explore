@@ -127,12 +127,14 @@ def upload_blobs(filename):
         credential=storage_creds,
     )
     container_name_for_original_content = args.container + "original"
-    blob_container_original = blob_service_original.get_container_client(container_name_for_original_content)
+    blob_container_original = blob_service_original.get_container_client(
+        container_name_for_original_content
+    )
     if not blob_container_original.exists():
         blob_container_original.create_container()
     try:
         with open(filename, "rb") as data:
-            file_path=os.path.basename(filename)
+            file_path = os.path.basename(filename)
             blob_container_original.upload_blob(file_path, data, overwrite=True)
     except Exception as e:
         print(f"Error uploading file: {e}")
@@ -385,7 +387,7 @@ def create_search_index():
                     type="Edm.String",
                     filterable=True,
                     facetable=True,
-                )
+                ),
             ],
             semantic_settings=SemanticSettings(
                 configurations=[

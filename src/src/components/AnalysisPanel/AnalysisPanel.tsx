@@ -18,12 +18,21 @@ interface Props {
 
 const pivotItemDisabledStyle = { disabled: true, style: { color: "grey" } };
 
+export function getFullPdfPath(citationFilePath: string): string {
+    // replace /content/ with /contentoriginal/ in citationFilePath
+    citationFilePath = citationFilePath.replace("/content/", "/contentoriginal/");
+    // remove the number at the end of the path <filename>-<number>.pdf to <filename>.pdf
+    citationFilePath = citationFilePath.replace(/-\d+\.pdf$/, ".pdf");
+    return citationFilePath;
+}
+
 export const AnalysisPanel = ({ answer, activeTab, activeCitation, citationHeight, className, onActiveTabChanged }: Props) => {
     const isDisabledThoughtProcessTab: boolean = !answer.thoughts;
     const isDisabledSupportingContentTab: boolean = !answer.data_points.length;
     const isDisabledCitationTab: boolean = !activeCitation;
 
     const sanitizedThoughts = DOMPurify.sanitize(answer.thoughts!);
+    const fullPDFUrl =activeCitation);
 
     return (
         <Pivot
@@ -50,6 +59,9 @@ export const AnalysisPanel = ({ answer, activeTab, activeCitation, citationHeigh
                 headerText="Citation"
                 headerButtonProps={isDisabledCitationTab ? pivotItemDisabledStyle : undefined}
             >
+                <a href={getFullPdfPath(fullPDFUrl ? fullPDFUrl : "")} target="_blank">
+                    Open full PDF
+                </a>
                 <iframe title="Citation" src={activeCitation} width="100%" height={citationHeight} />
             </PivotItem>
         </Pivot>

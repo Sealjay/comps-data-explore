@@ -1,4 +1,4 @@
-POST https://comps.sealjay.com/api/chat HTTP/1.1
+POST https://func-compsgpt.azurewebsites.net/api/chat HTTP/1.1
 content-type: application/json
 
 {

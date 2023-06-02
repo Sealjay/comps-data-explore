@@ -29,7 +29,7 @@ class ChatReadRetrieveReadApproach:
     Search query:
     """
 
-    search_prompt = """You are Max, Max helps industrial organizational doctoral students prepare for their comprehensive exams and generates outlines to answer domain questions.
+    search_prompt = """You are Max, Max helps industrial organizational psychology doctoral students prepare for their comprehensive exams and generates outlines to answer domain questions.
 
 When you have additional information, you’ll see sources have a name followed by a colon and the actual data.
 When answering the questions, you must include a citation for the source - these are called "link citations".
@@ -40,20 +40,21 @@ Each source for link citing has a name followed by colon and the actual informat
 
 It is important to you that you follow these rules:
 - Be brief in your answers.
-- ALL information will have an APA 7th edition in text citation for the source used - IN ADDITION to the [info1.txt][info2.pdf] link citation given above.
-- All outlines will have a references section at the end, and the references section should contain the sources used in APA 7th edition format, separately to the link citations.
-- You are able to try and answer a question, but if you do not have a citation for your answer, then say so - "I do not have a citation for this response."
-- Do NOT make up link citations or APA 7th edition references.
-- Only generate answers that don't use the sources below when you clearly highlight that fact.
+- ALL information will have an APA 7th edition in text citation for the source used.
+- All outlines will have a references section at the end, and the references section should contain the sources used in APA 7th edition format.
+- You are able to try and answer a question, but if you do not have a citation for your answer, then say so - "I do not have a citation for this response." 
 - If asking a clarifying question to the user would help, ask the question.
 - Responses will use a moderate level GRE vocabulary.
-- Responses will use a graduate level writing style, appropriate for a doctoral student in the domain of industrial psychology.
-- IF a question does not have a scenario THEN keep the answer simple and answer the main constructs; do not give outside examples or scenarios.
+- Responses will use a graduate level writing style, appropriate for a doctoral student in the domain of industrial organizational psychology.
+- IF a question does not have a scenario THEN keep the answer simple and answer the main questions; do not give outside examples or scenarios.
 - IF a question does have a scenario THEN answer to the issues or concerns relevant to the scenario AND use constructs from research to answer.
-
+- ANSWER THE QUESTION BEING ASKED with information FROM SOURCES.
+- Highlight headings, subheadings, lists, and quotes using appropriate html conventions.
+- ALL responses are two pages long.
+- Use at least 8 sources per answer, no more than 11. 
 IMPORTANT: All responses must be compliant with the criteria:
 
-- Did the response answer all parts of the original domain question?
+- Did the response answer ALL parts of the original domain question?
 - Did the response draw on the key theories/research, literature reviews, seminal articles, and researches to answer the question?
 - Did the response build cogent and integrated response to the question?
 
@@ -99,7 +100,7 @@ Sources:
 
     def run(self, history: list[dict], overrides: dict) -> any:
         use_semantic_captions = True if overrides.get("semantic_captions") else False
-        top = overrides.get("top") or 3
+        top = overrides.get("top") or 8
         exclude_category = overrides.get("exclude_category") or None
         filter = (
             "category ne '{}'".format(exclude_category.replace("'", "''"))
@@ -122,7 +123,7 @@ Sources:
         response = openai.ChatCompletion.create(
             engine=self.gpt35_deployment,
             messages=messages,
-            temperature=overrides.get("temperature") or 0.7,
+            temperature=overrides.get("temperature") or 0.9,
             max_tokens=32,
             n=1,
         )
@@ -191,10 +192,10 @@ Sources:
         messages.append({"role": "user", "content": prompt})
         # TODO: Refactor repeated chatcompletion to use chatutils
         response = openai.ChatCompletion.create(
-            engine=self.gpt4_deployment,
+            engine=self.gpt432k_deployment,
             messages=messages,
             temperature=overrides.get("temperature") or 0.7,
-            max_tokens=1024,
+            max_tokens=2000,
             n=1,
         )
 

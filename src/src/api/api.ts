@@ -32,5 +32,9 @@ export async function chatApi(options: ChatRequest): Promise<AskResponse> {
 }
 
 export function getCitationFilePath(citation: string): string {
+    // if citation is missing the .pdf suffix, add it
+    if (!citation.endsWith(".pdf")) {
+        citation += ".pdf";
+    }
     return `/api/content/${citation}`;
 }

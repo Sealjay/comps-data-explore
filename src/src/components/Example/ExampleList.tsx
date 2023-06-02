@@ -9,11 +9,14 @@ export type ExampleModel = {
 
 const EXAMPLES: ExampleModel[] = [
     {
-        text: "For a given organizational need (e.g., improving employee engagement), identify the process you would use to build an organizational survey from scratch to assess the targeted area.",
-        value: "For a given organizational need (e.g., improving employee engagement), identify the process you would use to build an organizational survey from scratch to assess the targeted area.",
+        text: "What are the primary research methods used in organizational psychology?",
+        value: "What are the primary research methods used in organizational psychology?"
     },
-    { text: "Write an outline for an essay on boundaryless and protean careers. Include references used.", value:"Write an outline for an essay on boundaryless and protean careers. Include references used." },
-    { text: "What is DEI?", value: "What is DEI?" }
+    {
+        text: "Write an outline for an essay on boundaryless and protean careers.",
+        value: "Write an outline for an essay on boundaryless and protean careers."
+    },
+    { text: "What is DEI and how does it differ from ESG?", value: "What is DEI and how does it differ from ESG?" }
 ];
 
 interface Props {

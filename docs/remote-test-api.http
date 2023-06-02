@@ -1,0 +1,15 @@
+POST https://comps.sealjay.com/api/chat HTTP/1.1
+content-type: application/json
+
+{
+	"history": [{
+		"user": "What are the theories of boundaryless careers?"
+	}],
+	"approach": "rrr",
+	"overrides": {
+		"semantic_ranker": "True",
+		"semantic_captions": "False",
+		"top": 3,
+		"suggest_followup_questions": "True"
+	}
+}

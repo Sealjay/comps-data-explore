@@ -21,7 +21,7 @@ const pivotItemDisabledStyle = { disabled: true, style: { color: "grey" } };
 export function getFullPdfPath(citationFilePath: string): string {
     // replace /content/ with /contentoriginal/ in citationFilePath
     citationFilePath = citationFilePath.replace("/content/", "/contentoriginal/");
-    // remove the number at the end of the path <filename>-<number>.pdf to <filename>.pdf
+    // remove only the final numbers in the format -0, -11, -111, etc from the filename; it will be in the format file-22ename-11.pdf; return file-22ename.pdf
     citationFilePath = citationFilePath.replace(/-\d+\.pdf$/, ".pdf");
     return citationFilePath;
 }

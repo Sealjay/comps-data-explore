@@ -10,18 +10,18 @@
             "headers": {
                 "cache-control": "must-revalidate, max-age=15770000"
             },
-            "allowedRoles": ["authenticated"]
+            "allowedRoles": ["anonymous"]
         },
         {
             "route": "/api/contentoriginal/*",
             "headers": {
                 "cache-control": "must-revalidate, max-age=15770000"
             },
-            "allowedRoles": ["authenticated"]
+            "allowedRoles": ["anonymous"]
         },
         {
             "route": "/api/chat",
-            "allowedRoles": ["authenticated"]
+            "allowedRoles": ["anonymous"]
         },
         {
             "route": "/.auth/login/twitter",
@@ -33,7 +33,7 @@
         },
         {
             "route": "/*",
-            "allowedRoles": ["authenticated"]
+            "allowedRoles": ["anonymous"]
         }
     ],
     "navigationFallback": {
